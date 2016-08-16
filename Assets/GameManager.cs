@@ -4,51 +4,33 @@ using UnityEngine.SceneManagement;
 
 public abstract class GameManager : MonoBehaviour {
 
-    protected bool inGame;
-    private static bool waitForGame;
-    private static bool waitForMenu;
-    private Scene oldScene;
-
-    protected abstract void handleStartGame();
-    protected abstract void handleEndGame();
+    [SerializeField]
+    protected string game;
+    [SerializeField]
+    protected string menu;
 
     void Awake() {
         if (GameObject.FindGameObjectsWithTag("GameController").Length >= 2)
             Destroy(this.gameObject);
         DontDestroyOnLoad(this);
-        waitForMenu = false;
+        SceneManager.sceneLoaded += gameLoaded;
+    }
+
+    private void gameLoaded(Scene scene, LoadSceneMode mode) {
+        if (scene.name == game)
+            enterGame();
+        else if (scene.name == menu)
+            enterMenu();
     }
 
     public void startGame() {
-        oldScene = SceneManager.GetActiveScene();
-        waitForGame = true;
-        handleStartGame();
+        SceneManager.LoadScene(game);
     }
 
     public void endGame() {
-        oldScene = SceneManager.GetActiveScene();
-        waitForMenu = true;
-        handleEndGame();
+        SceneManager.LoadScene(menu);
     }
 
-    protected virtual void enterGame() {
-        Debug.Log("In game");
-        inGame = true;
-        waitForGame = false;
-    }
-
-    protected virtual void enterMenu() {
-        inGame = false;
-        waitForMenu = false;
-    }
-
-    protected virtual void Update() {
-        if (waitForGame) 
-            if (SceneManager.GetActiveScene() != oldScene)
-                enterGame();
-        if (waitForMenu)
-            if (SceneManager.GetActiveScene() != oldScene)
-                enterMenu();
-    }
-
+    protected abstract void enterGame();
+    protected abstract void enterMenu();
 }
