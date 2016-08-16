@@ -4,16 +4,23 @@ using System.Collections;
 
 public class PongManager : GameManager {
 
-    public override void startGame() {
+    protected override void handleStartGame() {
         SceneManager.LoadScene("Pong_Game");
     }
 
-	// Use this for initialization
-	void Start () {
+    protected override void handleEndGame() {
+        SceneManager.LoadScene("Pong_Menu");
+    }
+
+    // Use this for initialization
+    void Start () {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	protected override void Update () {
+        base.Update();
+        if (Input.GetKeyDown("escape"))
+            if (inGame)
+                endGame();
 	}
 }

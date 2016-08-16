@@ -5,17 +5,16 @@ using System;
 
 public class TankManager : GameManager {
 
-    public override void startGame() {
+    protected override void handleStartGame() {
         SceneManager.LoadScene("Tank_Game");
+    }
+
+    protected override void handleEndGame() {
+        SceneManager.LoadScene("Tank_Menu");
     }
 
     // Use this for initialization
     void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
 	
 	}
 }

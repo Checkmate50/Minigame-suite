@@ -4,16 +4,15 @@ using System.Collections;
 
 public class ZappersManager : GameManager {
 
-    public override void startGame() {
+    protected override void handleStartGame() {
         SceneManager.LoadScene("Zappers_Game");
     }
 
-	// Use this for initialization
-	void Start () {
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+    protected override void handleEndGame() {
+        SceneManager.LoadScene("Zappers_Menu");
+    }
+
+    // Use this for initialization
+    void Start () {
 	}
 }
