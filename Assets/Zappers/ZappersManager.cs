@@ -2,10 +2,10 @@
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class PongManager : GameManager {
+public class ZappersManager : GameManager {
 
     public override void startGame() {
-        SceneManager.LoadScene("Pong_Game");
+        SceneManager.LoadScene("Zappers_Game");
     }
 
 	// Use this for initialization

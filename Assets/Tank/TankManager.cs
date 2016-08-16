@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System;
 
-public class PongManager : GameManager {
+public class TankManager : GameManager {
 
     public override void startGame() {
-        SceneManager.LoadScene("Pong_Game");
+        SceneManager.LoadScene("Tank_Game");
     }
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
+	
 	}
 	
 	// Update is called once per frame

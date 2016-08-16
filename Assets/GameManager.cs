@@ -7,4 +7,6 @@ public abstract class GameManager : MonoBehaviour {
         DontDestroyOnLoad(this);
     }
 
+    public abstract void startGame();
+
 }
