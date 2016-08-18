@@ -10,10 +10,15 @@ public abstract class GameManager : MonoBehaviour {
     protected string menu;
 
     void Awake() {
-        if (GameObject.FindGameObjectsWithTag("GameController").Length >= 2)
-            Destroy(this.gameObject);
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("GameController"))
+            if (this.gameObject != g)
+                Destroy(g.gameObject);
         DontDestroyOnLoad(this);
         SceneManager.sceneLoaded += gameLoaded;
+    }
+
+    void OnDestroy() {
+        SceneManager.sceneLoaded -= gameLoaded;
     }
 
     private void gameLoaded(Scene scene, LoadSceneMode mode) {
